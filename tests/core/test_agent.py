@@ -1,10 +1,12 @@
 import asyncio
-from typing import Any, Dict, Text
+from typing import Any, Dict, Text, List
 
 import pytest
 from sanic import Sanic, response
 
 import rasa.core
+from rasa.core.policies.form_policy import FormPolicy
+from rasa.core.policies.rule_policy import RulePolicy
 from rasa.core.policies.ted_policy import TEDPolicy
 from rasa.core.policies.mapping_policy import MappingPolicy
 import rasa.utils.io
@@ -181,7 +183,7 @@ async def test_wait_time_between_pulls_without_interval(model_server, monkeypatc
     )
 
     agent = Agent()
-    # schould not call schedule_model_pulling, if it does, this will raise
+    # should not call schedule_model_pulling, if it does, this will raise
     await rasa.core.agent.load_from_server(agent, model_server=model_endpoint_config)
     jobs.kill_scheduler()
 
@@ -195,16 +197,30 @@ async def test_load_agent(trained_rasa_model: str):
 
 
 @pytest.mark.parametrize(
-    "domain, policy_config",
-    [({"forms": ["restaurant_form"]}, {"policies": [{"name": "MemoizationPolicy"}]})],
+    "policy_config", [{"policies": [{"name": "MemoizationPolicy"}]}]
 )
-def test_form_without_form_policy(domain, policy_config):
+def test_form_without_form_policy(policy_config: Dict[Text, List[Text]]):
     with pytest.raises(InvalidDomain) as execinfo:
         Agent(
-            domain=Domain.from_dict(domain),
+            domain=Domain.from_dict({"forms": ["restaurant_form"]}),
             policies=PolicyEnsemble.from_dict(policy_config),
         )
     assert "haven't added the FormPolicy" in str(execinfo.value)
+
+
+@pytest.mark.parametrize(
+    "policy_config",
+    [
+        {"policies": [{"name": FormPolicy.__name__}]},
+        {"policies": [{"name": RulePolicy.__name__}]},
+    ],
+)
+def test_forms_with_suited_policy(policy_config: Dict[Text, List[Text]]):
+    # Doesn't raise
+    Agent(
+        domain=Domain.from_dict({"forms": ["restaurant_form"]}),
+        policies=PolicyEnsemble.from_dict(policy_config),
+    )
 
 
 @pytest.mark.parametrize(
