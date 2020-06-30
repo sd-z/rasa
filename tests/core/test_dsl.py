@@ -128,7 +128,7 @@ async def test_persist_and_read_test_story(tmpdir, default_domain):
         existing_stories.discard(story_str)
 
 
-async def test_persist_form_story(tmpdir):
+async def test_persist_form_story():
     domain = Domain.load("data/test_domains/form.yml")
 
     tracker = DialogueStateTracker("", domain.slots)
@@ -148,8 +148,7 @@ async def test_persist_form_story(tmpdir):
         "    - some_form\n"
         "* stop\n"
         "    - utter_ask_continue\n"
-        "    - action_listen\n"
-        "* form: inform\n"
+        "* inform\n"
         "    - some_form\n"
         '    - form{"name": null}\n'
         "* goodbye\n"
