@@ -1,6 +1,7 @@
 import pytest
 
 from rasa.core import training
+from rasa.core.actions.action import ACTION_LISTEN_NAME
 from rasa.core.domain import Domain
 from rasa.core.events import ActionExecuted, UserUttered, SlotSet
 from rasa.core.training.story_reader.yaml_story_reader import YAMLStoryReader
@@ -85,7 +86,6 @@ async def test_can_read_test_story_with_entities_without_value(default_domain: D
 
 
 async def test_is_yaml_file():
-
     valid_yaml_file = "data/test_yaml_stories/stories.yml"
     valid_markdown_file = "data/test_stories/stories.md"
 
@@ -108,7 +108,6 @@ async def test_yaml_intent_with_leading_slash_warning(default_domain: Domain):
 
 
 async def test_yaml_wrong_yaml_format_warning(default_domain: Domain):
-
     yaml_file = "data/test_wrong_yaml_stories/wrong_yaml.yml"
 
     with pytest.warns(UserWarning):
@@ -119,3 +118,32 @@ async def test_yaml_wrong_yaml_format_warning(default_domain: Domain):
             tracker_limit=1000,
             remove_duplicates=False,
         )
+
+
+async def test_parsing_of_e2e_stories(default_domain: Domain):
+    yaml_file = "data/test_yaml_stories/stories_hybrid_e2e.yml"
+    tracker = await training.load_data(
+        yaml_file,
+        default_domain,
+        use_story_concatenation=False,
+        tracker_limit=1000,
+        remove_duplicates=False,
+    )
+
+    assert len(tracker) == 1
+
+    assert list(tracker[0].events) == [
+        ActionExecuted(ACTION_LISTEN_NAME),
+        UserUttered("simple", {"name": "simple"}),
+        ActionExecuted("utter_greet"),
+        ActionExecuted(ACTION_LISTEN_NAME),
+        UserUttered("I am looking for a restaurant"),
+        ActionExecuted("good for you", e2e_text="good for you"),
+        ActionExecuted(ACTION_LISTEN_NAME),
+        UserUttered("goodbye", {"name": "goodbye"}),
+        ActionExecuted("utter_goodbye"),
+        ActionExecuted(ACTION_LISTEN_NAME),
+        UserUttered("One more thing"),
+        ActionExecuted("What?", e2e_text="good for you"),
+        ActionExecuted(ACTION_LISTEN_NAME),
+    ]
