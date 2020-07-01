@@ -2150,7 +2150,7 @@ description = "Open source machine learning framework to automate text- and voic
 name = "rasa-sdk"
 optional = false
 python-versions = ">=3.6,<4.0"
-version = "1.10.1"
+version = "1.10.2"
 
 [package.dependencies]
 coloredlogs = ">=10,<15"
@@ -2171,6 +2171,7 @@ version = "0.7.26"
 
 [package.source]
 reference = "rasa-pypi"
+type = "legacy"
 url = "https://pypi.rasa.com/simple"
 
 [[package]]
@@ -4530,8 +4531,8 @@ questionary = [
     {file = "questionary-1.5.2.tar.gz", hash = "sha256:f6e41e36b6c86fe0c3ff12a30c6c6a4e80129efba5ad0a115d71fd5df119c726"},
 ]
 rasa-sdk = [
-    {file = "rasa-sdk-1.10.1.tar.gz", hash = "sha256:c9ed0f2843b315c0c057fb903ffbdfae9204fe519833c23db2146e029ac75c44"},
-    {file = "rasa_sdk-1.10.1-py3-none-any.whl", hash = "sha256:5685a4dda8d42fe16a824ae2cf5fb84ec266bd063af2936f0f4eb4398166e94c"},
+    {file = "rasa-sdk-1.10.2.tar.gz", hash = "sha256:7e3e41337f107c5f9d66b242a794dca1a30b7743867b0ecff06232f2e38562e7"},
+    {file = "rasa_sdk-1.10.2-py3-none-any.whl", hash = "sha256:e65cb1f0c4efc42aeda0c05bd8eeaacd9db52424f3d54a458175a8699de0e738"},
 ]
 rasabaster = []
 redis = [
@@ -4562,6 +4563,7 @@ regex = [
     {file = "regex-2020.5.14.tar.gz", hash = "sha256:ce450ffbfec93821ab1fea94779a8440e10cf63819be6e176eb1973a6017aff5"},
 ]
 requests = [
+    {file = "requests-2.23.0-py2.7.egg", hash = "sha256:5d2d0ffbb515f39417009a46c14256291061ac01ba8f875b90cad137de83beb4"},
     {file = "requests-2.23.0-py2.py3-none-any.whl", hash = "sha256:43999036bfa82904b6af1d99e4882b560e5e2c68e5c4b0aa03b655f3d7d73fee"},
     {file = "requests-2.23.0.tar.gz", hash = "sha256:b3f43d496c6daba4493e7c431722aeb7dbc6288f52a6e04e7b6023b0247817e6"},
 ]
