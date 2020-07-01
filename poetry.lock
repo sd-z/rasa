@@ -2095,7 +2095,7 @@ description = "Python type inferencer"
 name = "pytype"
 optional = false
 python-versions = "<3.9,>=3.5"
-version = "2020.6.1"
+version = "2020.6.26"
 
 [package.dependencies]
 attrs = "*"
@@ -2171,6 +2171,7 @@ version = "0.7.26"
 
 [package.source]
 reference = "rasa-pypi"
+type = "legacy"
 url = "https://pypi.rasa.com/simple"
 
 [[package]]
@@ -4492,7 +4493,7 @@ python-telegram-bot = [
     {file = "python_telegram_bot-12.7-py2.py3-none-any.whl", hash = "sha256:6878cc642114c8c116ceada41639a9df487f42d5478d9f34cae513cc5c260dee"},
 ]
 pytype = [
-    {file = "pytype-2020.6.1.tar.gz", hash = "sha256:08ddb9940764492b701a8985c30437239eb2c34003448cca760769264f5ff2f8"},
+    {file = "pytype-2020.6.26.tar.gz", hash = "sha256:1252c97c16c6bfcbb380b3c26c18982d86a6a75e06b1381120f110e57fdf6feb"},
 ]
 pytz = [
     {file = "pytz-2020.1-py2.py3-none-any.whl", hash = "sha256:a494d53b6d39c3c6e44c3bec237336e14305e4f29bbf800b599253057fbb79ed"},
@@ -4562,6 +4563,7 @@ regex = [
     {file = "regex-2020.5.14.tar.gz", hash = "sha256:ce450ffbfec93821ab1fea94779a8440e10cf63819be6e176eb1973a6017aff5"},
 ]
 requests = [
+    {file = "requests-2.23.0-py2.7.egg", hash = "sha256:5d2d0ffbb515f39417009a46c14256291061ac01ba8f875b90cad137de83beb4"},
     {file = "requests-2.23.0-py2.py3-none-any.whl", hash = "sha256:43999036bfa82904b6af1d99e4882b560e5e2c68e5c4b0aa03b655f3d7d73fee"},
     {file = "requests-2.23.0.tar.gz", hash = "sha256:b3f43d496c6daba4493e7c431722aeb7dbc6288f52a6e04e7b6023b0247817e6"},
 ]
